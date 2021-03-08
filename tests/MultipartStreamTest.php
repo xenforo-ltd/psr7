@@ -100,19 +100,19 @@ class MultipartStreamTest extends TestCase
 
     public function testSerializesFiles(): void
     {
-        $f1 = Psr7\FnStream::decorate(Psr7\stream_for('foo'), [
+        $f1 = Psr7\FnStream::decorate(Psr7\Utils::streamFor('foo'), [
             'getMetadata' => function () {
                 return '/foo/bar.txt';
             }
         ]);
 
-        $f2 = Psr7\FnStream::decorate(Psr7\stream_for('baz'), [
+        $f2 = Psr7\FnStream::decorate(Psr7\Utils::streamFor('baz'), [
             'getMetadata' => function () {
                 return '/foo/baz.jpg';
             }
         ]);
 
-        $f3 = Psr7\FnStream::decorate(Psr7\stream_for('bar'), [
+        $f3 = Psr7\FnStream::decorate(Psr7\Utils::streamFor('bar'), [
             'getMetadata' => function () {
                 return '/foo/bar.gif';
             }
@@ -156,12 +156,12 @@ bar
 
 EOT;
 
-        self::assertSame($expected, str_replace("\r", '', $b));
+        self::assertSame($expected, str_replace("\r", '', (string) $b));
     }
 
     public function testSerializesFilesWithCustomHeaders(): void
     {
-        $f1 = Psr7\FnStream::decorate(Psr7\stream_for('foo'), [
+        $f1 = Psr7\FnStream::decorate(Psr7\Utils::streamFor('foo'), [
             'getMetadata' => function () {
                 return '/foo/bar.txt';
             }
@@ -190,18 +190,18 @@ foo
 
 EOT;
 
-        self::assertSame($expected, str_replace("\r", '', $b));
+        self::assertSame($expected, str_replace("\r", '', (string) $b));
     }
 
     public function testSerializesFilesWithCustomHeadersAndMultipleValues(): void
     {
-        $f1 = Psr7\FnStream::decorate(Psr7\stream_for('foo'), [
+        $f1 = Psr7\FnStream::decorate(Psr7\Utils::streamFor('foo'), [
             'getMetadata' => function () {
                 return '/foo/bar.txt';
             }
         ]);
 
-        $f2 = Psr7\FnStream::decorate(Psr7\stream_for('baz'), [
+        $f2 = Psr7\FnStream::decorate(Psr7\Utils::streamFor('baz'), [
             'getMetadata' => function () {
                 return '/foo/baz.jpg';
             }
@@ -241,6 +241,6 @@ baz
 
 EOT;
 
-        self::assertSame($expected, str_replace("\r", '', $b));
+        self::assertSame($expected, str_replace("\r", '', (string) $b));
     }
 }

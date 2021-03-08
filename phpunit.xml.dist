@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
     backupGlobals="true"
-    bootstrap="vendor/autoload.php"
     colors="true"
-    failOnWarning="true"
+    beStrictAboutOutputDuringTests="true"
+    beStrictAboutTestsThatDoNotTestAnything="true"
+    bootstrap="vendor/autoload.php"
 >
     <testsuites>
         <testsuite name="Guzzle PSR-7 Test Suite">
