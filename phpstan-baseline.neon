@@ -166,6 +166,11 @@ parameters:
 			path: src/Utils.php
 
 		-
+			message: "#^Variable \\$handle might not be defined\\.$#"
+			count: 1
+			path: src/Utils.php
+
+		-
 			message: "#^Unreachable statement \\- code above always terminates\\.$#"
 			count: 1
 			path: src/Utils.php
