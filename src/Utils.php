@@ -343,7 +343,7 @@ final class Utils
         $ex = null;
         set_error_handler(static function (int $errno, string $errstr) use ($filename, $mode, &$ex): bool {
             $ex = new \RuntimeException(sprintf(
-                'Unable to open %s using mode %s: %s',
+                'Unable to open "%s" using mode "%s": %s',
                 $filename,
                 $mode,
                 $errstr
@@ -352,8 +352,18 @@ final class Utils
             return true;
         });
 
-        /** @var resource $handle */
-        $handle = fopen($filename, $mode);
+        try {
+            /** @var resource $handle */
+            $handle = fopen($filename, $mode);
+        } catch (\Throwable $e) {
+            $ex = new \RuntimeException(sprintf(
+                'Unable to open "%s" using mode "%s": %s',
+                $filename,
+                $mode,
+                $e->getMessage()
+            ), 0, $e);
+        }
+
         restore_error_handler();
 
         if ($ex) {
