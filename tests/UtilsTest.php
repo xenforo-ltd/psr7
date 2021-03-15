@@ -187,9 +187,17 @@ class UtilsTest extends TestCase
     public function testThrowsExceptionNotWarning(): void
     {
         $this->expectException(\RuntimeException::class);
-        $this->expectExceptionMessage('Unable to open /path/to/does/not/exist using mode r');
+        $this->expectExceptionMessage('Unable to open "/path/to/does/not/exist" using mode "r"');
 
         Psr7\Utils::tryFopen('/path/to/does/not/exist', 'r');
+    }
+
+    public function testThrowsExceptionNotValueError(): void
+    {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('Unable to open "" using mode "r"');
+
+        Psr7\Utils::tryFopen('', 'r');
     }
 
     public function testCreatesUriForValue(): void
