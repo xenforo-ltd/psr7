@@ -459,4 +459,15 @@ class UtilsTest extends TestCase
 
         self::assertSame(['name' => 'value'], $modifiedRequest->getQueryParams());
     }
+
+    public function testModifyServerRequestRetainsAttributes(): void
+    {
+        $request = (new Psr7\ServerRequest('GET', 'http://example.com/bla'))
+            ->withAttribute('foo', 'bar');
+
+        /** @var Psr7\ServerRequest $modifiedRequest */
+        $modifiedRequest = Psr7\Utils::modifyRequest($request, []);
+
+        self::assertSame(['foo' => 'bar'], $modifiedRequest->getAttributes());
+    }
 }
