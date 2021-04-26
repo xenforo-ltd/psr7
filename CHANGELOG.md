@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## 2.0.0@RC-1 - 2021-04-26
+
+### Fixed
+
+- Handle possibly unset `url` in `stream_get_meta_data`
+
 ## 2.0.0@beta-1 - 2021-03-21
 
 ### Added
