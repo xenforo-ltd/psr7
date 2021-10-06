@@ -14,6 +14,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   for backwards compatibility. Callers relying on the exception being thrown to detect invalid
   URIs should catch the new exception.
 
+### Fixed
+
+- Return `null` in caching stream size if remote size is `null`
+
 ## 2.0.0 - 2021-06-30
 
 Identical to the RC release.
