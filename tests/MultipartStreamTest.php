@@ -101,19 +101,19 @@ class MultipartStreamTest extends TestCase
     public function testSerializesFiles(): void
     {
         $f1 = Psr7\FnStream::decorate(Psr7\Utils::streamFor('foo'), [
-            'getMetadata' => function () {
+            'getMetadata' => static function (): string {
                 return '/foo/bar.txt';
             }
         ]);
 
         $f2 = Psr7\FnStream::decorate(Psr7\Utils::streamFor('baz'), [
-            'getMetadata' => function () {
+            'getMetadata' => static function (): string {
                 return '/foo/baz.jpg';
             }
         ]);
 
         $f3 = Psr7\FnStream::decorate(Psr7\Utils::streamFor('bar'), [
-            'getMetadata' => function () {
+            'getMetadata' => static function (): string {
                 return '/foo/bar.gif';
             }
         ]);
@@ -162,7 +162,7 @@ EOT;
     public function testSerializesFilesWithCustomHeaders(): void
     {
         $f1 = Psr7\FnStream::decorate(Psr7\Utils::streamFor('foo'), [
-            'getMetadata' => function () {
+            'getMetadata' => static function (): string {
                 return '/foo/bar.txt';
             }
         ]);
@@ -196,13 +196,13 @@ EOT;
     public function testSerializesFilesWithCustomHeadersAndMultipleValues(): void
     {
         $f1 = Psr7\FnStream::decorate(Psr7\Utils::streamFor('foo'), [
-            'getMetadata' => function () {
+            'getMetadata' => static function (): string {
                 return '/foo/bar.txt';
             }
         ]);
 
         $f2 = Psr7\FnStream::decorate(Psr7\Utils::streamFor('baz'), [
-            'getMetadata' => function () {
+            'getMetadata' => static function (): string {
                 return '/foo/baz.jpg';
             }
         ]);
@@ -242,5 +242,29 @@ baz
 EOT;
 
         self::assertSame($expected, str_replace("\r", '', (string) $b));
+    }
+
+    public function testCanCreateWithNoneMetadataStreamField(): void
+    {
+        $str = 'dummy text';
+        $a = Psr7\Utils::streamFor(static function () use ($str): string {
+            return $str;
+        });
+        $b = new Psr7\LimitStream($a, \strlen($str));
+        $c = new MultipartStream([
+            [
+                'name'     => 'foo',
+                'contents' => $b,
+            ],
+        ], 'boundary');
+
+        self::assertSame(\implode("\r\n", [
+            '--boundary',
+            'Content-Disposition: form-data; name="foo"',
+            '',
+            $str,
+            '--boundary--',
+            '',
+        ]), (string)$c);
     }
 }
