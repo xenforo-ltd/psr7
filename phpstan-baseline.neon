@@ -306,7 +306,7 @@ parameters:
 			path: src/UriResolver.php
 
 		-
-			message: "#^Method GuzzleHttp\\\\Psr7\\\\Utils\\:\\:tryStreamGetContents\\(\\) should return string but returns string\\|false\\.$#"
+			message: "#^Method GuzzleHttp\\\\Psr7\\\\Utils\\:\\:tryGetContents\\(\\) should return string but returns string\\|false\\.$#"
 			count: 1
 			path: src/Utils.php
 
