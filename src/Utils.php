@@ -397,7 +397,7 @@ final class Utils
      *
      * @throws \RuntimeException if the stream cannot be read
      */
-    public static function tryStreamGetContents($stream): string
+    public static function tryGetContents($stream): string
     {
         $ex = null;
         set_error_handler(static function (int $errno, string $errstr) use (&$ex): bool {

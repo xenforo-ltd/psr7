@@ -212,7 +212,7 @@ class UtilsTest extends TestCase
         $this->expectExceptionMessage('Unable to read stream contents');
 
         try {
-            Psr7\Utils::tryStreamGetContents($r);
+            Psr7\Utils::tryGetContents($r);
         } finally {
             fclose($r);
         }
@@ -226,7 +226,7 @@ class UtilsTest extends TestCase
         $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage('Unable to read stream contents');
 
-        Psr7\Utils::tryStreamGetContents($r);
+        Psr7\Utils::tryGetContents($r);
     }
 
     public function testCreatesUriForValue(): void
