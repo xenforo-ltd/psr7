@@ -1218,7 +1218,7 @@ final class MimeType
     /**
      * Determines the mimetype of a file by looking at its extension.
      *
-     * @link https://raw.githubusercontent.com/jshttp/mime-db/master/db.json
+     * @see https://raw.githubusercontent.com/jshttp/mime-db/master/db.json
      */
     public static function fromFilename(string $filename): ?string
     {
@@ -1228,7 +1228,7 @@ final class MimeType
     /**
      * Maps a file extensions to a mimetype.
      *
-     * @link https://raw.githubusercontent.com/jshttp/mime-db/master/db.json
+     * @see https://raw.githubusercontent.com/jshttp/mime-db/master/db.json
      */
     public static function fromExtension(string $extension): ?string
     {
