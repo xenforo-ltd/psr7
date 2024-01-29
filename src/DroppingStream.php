@@ -16,6 +16,8 @@ class DroppingStream implements StreamInterface
 
     private $maxLength;
 
+    private $stream;
+
     /**
      * @param StreamInterface $stream    Underlying stream to decorate.
      * @param int             $maxLength Maximum size before dropping data.

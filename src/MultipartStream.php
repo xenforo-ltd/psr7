@@ -16,6 +16,8 @@ class MultipartStream implements StreamInterface
 
     private $boundary;
 
+    private $stream;
+
     /**
      * @param array  $elements Array of associative arrays, each containing a
      *                         required "name" key mapping to the form field,
