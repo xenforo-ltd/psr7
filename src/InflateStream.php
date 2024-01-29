@@ -21,6 +21,8 @@ class InflateStream implements StreamInterface
 {
     use StreamDecoratorTrait;
 
+    private $stream;
+
     public function __construct(StreamInterface $stream)
     {
         // read the first 10 bytes, ie. gzip header
